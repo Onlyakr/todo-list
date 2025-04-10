@@ -43,7 +43,7 @@ const App = () => {
     setTodos(todos.map((todo) => ({ ...todo, isComplete: false })));
   };
   const handleClear = () => {
-    let isSure = prompt("Are you sure? (Y/N) : ");
+    let isSure = prompt("Type 'Y' to confirm : ");
     isSure === "Y" && setTodos([]);
   };
   useEffect(() => {
