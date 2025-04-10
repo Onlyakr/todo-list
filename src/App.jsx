@@ -39,6 +39,13 @@ const App = () => {
     setTodos(todos.filter((todo) => todo.id !== id));
     console.log(todos);
   };
+  const handleReset = () => {
+    setTodos(todos.map((todo) => ({ ...todo, isComplete: false })));
+  };
+  const handleClear = () => {
+    let isSure = prompt("Are you sure? (Y/N) : ");
+    isSure === "Y" && setTodos([]);
+  };
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
@@ -51,7 +58,6 @@ const App = () => {
           <img src={todo_icon} alt="todo_icon" className="size-10 md:size-12" />
           <p className="text-2xl font-semibold md:text-4xl">Todo List</p>
         </div>
-
         {/* Input Task */}
         <form
           className="bg-gray-300 text-lg font-medium w-11/12 min-h-14 flex gap-2 rounded-4xl justify-between md:text-2xl md:min-h-18"
@@ -68,7 +74,6 @@ const App = () => {
             ADD
           </button>
         </form>
-
         {/* Todos */}
         <ul className="w-full flex flex-col gap-6 px-4 py-2 items-start text-lg font-normal overflow-auto md:px-10 md- md:text-2xl">
           {todos.map((todo, index) => (
@@ -98,6 +103,21 @@ const App = () => {
             </li>
           ))}
         </ul>
+        {/* Button */}
+        <div className="w-full flex items-center justify-center gap-10">
+          <button
+            className="font-medium text-lg text-white bg-red-600 w-1/3 h-14 rounded-full transition-all md:text-2xl hover:bg-red-600/70 hover:scale-95 active:bg-red-600 active:scale-105"
+            onClick={handleReset}
+          >
+            Reset
+          </button>
+          <button
+            className="font-medium text-lg text-white bg-red-600 w-1/3 h-14 rounded-full transition-all md:text-2xl hover:bg-red-600/70 hover:scale-95 active:bg-red-600 active:scale-105"
+            onClick={handleClear}
+          >
+            Clear
+          </button>
+        </div>
       </div>
     </div>
   );
